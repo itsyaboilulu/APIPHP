@@ -18,11 +18,19 @@ class AuthController {
         $username = $postData['username'];
         $password = $postData['password'];
 
+        // return $response->withJson(
+        //     password_hash(
+        //         $password, PASSWORD_BCRYPT
+        //     )
+        // );
+
+
         $eh = AuthValidation::login(null, $username, $password);
 
         if ($eh->hasErrors()){
             return $eh->getResponse($response);
         }
+
 
         //check username
         $user = (new getUser())->withPassword()->fromUsername($username);
