@@ -12,7 +12,8 @@ class AllRolls {
             ->with([
                 'member', 'targetMember'
             ])
-            ->orderBy('roll_id', 'desc');
+            ->orderBy('roll_id', 'desc')
+            ->get();
 
         $ret = [];
         $children = [];
@@ -35,9 +36,9 @@ class AllRolls {
                     'id' => $i->member->user_id,
                     'name' => $i->member->user_username
                 ],
-                'child' => $children[$i->roll_id] ? $ret[$children[$i->roll_id]] : null
+                'child' => isset($children[$i->roll_id]) ? $ret[$children[$i->roll_id]] : null
             ];
-            if ($children[$i->roll_id]){
+            if (isset($children[$i->roll_id])){
                 unset($ret[$children[$i->roll_id]]);
             }
         }

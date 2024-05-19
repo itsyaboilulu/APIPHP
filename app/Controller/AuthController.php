@@ -9,6 +9,7 @@ use App\Model\Member\UserModel;
 use App\Helper\AuthHelper;
 
 use App\Engine\Member\getUser;
+// use App\Engine\Logs\CreateOrUpdateLoginAudit;
 
 class AuthController {
 
@@ -18,11 +19,20 @@ class AuthController {
         $username = $postData['username'];
         $password = $postData['password'];
 
+        // return $response->withJson(
+        //     password_hash(
+        //         $password, PASSWORD_BCRYPT
+        //     )
+        // );
+
+
         $eh = AuthValidation::login(null, $username, $password);
 
         if ($eh->hasErrors()){
+            // CreateOrUpdateLoginAudit::create();
             return $eh->getResponse($response);
         }
+
 
         //check username
         $user = (new getUser())->withPassword()->fromUsername($username);

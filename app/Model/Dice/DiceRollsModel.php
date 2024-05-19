@@ -6,7 +6,7 @@ use App\Model\BaseModel;
 
 use App\Model\Member\UserModel;
  
-class ReasonsModel extends BaseModel {
+class DiceRollsModel extends BaseModel {
 
     public $fields = [
         'roll_id',
@@ -19,6 +19,7 @@ class ReasonsModel extends BaseModel {
     ];
 
     protected $table = 'dice_rolls';
+    protected $guarded = ['roll_id'];
 
     public function member(){
         return $this->hasOne(UserModel::class, 'user_id', 'roll_member');
