@@ -6,7 +6,7 @@ use App\Model\BaseModel;
 
 use App\Model\Member\UserModel;
  
-class ReasonsModel extends BaseModel {
+class DiceRollsModel extends BaseModel {
 
     public $fields = [
         'roll_id',

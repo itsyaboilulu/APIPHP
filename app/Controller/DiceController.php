@@ -22,7 +22,7 @@ class DiceController {
 
         $log = CreateOrUpdateDiceRoll::create($target, ($user->id ?? $user->i), $roll, $type, $parent);
 
-        return $response->withJson($log->roll_id);
+        return $response->withJson(['success' => $log->id]);
     }
 
     public function getRoll($request, $response){
@@ -34,7 +34,7 @@ class DiceController {
         $user = $request->getAttribute('userLoggedIn');
 
         $postData = $request->getParams();
-        $taregt = $postData['taregt'] ?? ($user->id ?? $user->i);
+        $target = $postData['target'] ?? ($user->id ?? $user->i);
 
         return $response->withJson([
             'success' => CreateOrUpdatePot::create(

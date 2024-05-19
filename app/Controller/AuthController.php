@@ -9,6 +9,7 @@ use App\Model\Member\UserModel;
 use App\Helper\AuthHelper;
 
 use App\Engine\Member\getUser;
+// use App\Engine\Logs\CreateOrUpdateLoginAudit;
 
 class AuthController {
 
@@ -28,6 +29,7 @@ class AuthController {
         $eh = AuthValidation::login(null, $username, $password);
 
         if ($eh->hasErrors()){
+            // CreateOrUpdateLoginAudit::create();
             return $eh->getResponse($response);
         }
 

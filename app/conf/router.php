@@ -7,6 +7,7 @@ use App\Controller\ListController;
 use App\Controller\DiceController;
 
 use App\Middleware\JwtMiddleware;
+use App\Middleware\ApiRequestMiddleware;
 
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
@@ -55,7 +56,9 @@ $app->group('/v1', function($v1){
             $dice->post('/logFreeParking', DiceController::class.':logFreeParking');
         });
 
-    })->add(new JwtMiddleware);
+    })
+    ->add(new ApiRequestMiddleware)
+    ->add(new JwtMiddleware);
 });
 
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
